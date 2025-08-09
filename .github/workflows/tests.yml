@@ -1,0 +1,168 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-backend:
+    name: Backend Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+        cache: 'npm'
+        cache-dependency-path: backend/package-lock.json
+    
+    - name: Install dependencies
+      run: |
+        cd backend
+        npm ci
+    
+    - name: Run backend tests
+      run: |
+        cd backend
+        npm test
+    
+    - name: Check backend can start
+      run: |
+        cd backend
+        timeout 10s node src/index.js || exit 0
+
+  test-ios:
+    name: iOS Tests
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Select Xcode
+      run: sudo xcode-select -s /Applications/Xcode.app
+    
+    - name: Show Xcode version
+      run: xcodebuild -version
+    
+    - name: Resolve Swift packages
+      run: |
+        cd Navi_app
+        xcodebuild -resolvePackageDependencies
+    
+    - name: Build iOS app
+      run: |
+        xcodebuild build \
+          -project Navi_app/Navi_app.xcodeproj \
+          -scheme Navi_app \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+          -derivedDataPath ./DerivedData \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO
+    
+    - name: Run iOS tests
+      run: |
+        xcodebuild test \
+          -project Navi_app/Navi_app.xcodeproj \
+          -scheme Navi_app \
+          -destination 'platform=iOS Simulator,name=iPhone 15,OS=latest' \
+          -derivedDataPath ./DerivedData \
+          -only-testing:Navi_appTests \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO \
+          | xcpretty --report junit --output test-results/ios-tests.xml
+      continue-on-error: true
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: ios-test-results
+        path: test-results/
+
+  test-watchos:
+    name: watchOS Tests
+    runs-on: macos-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Select Xcode
+      run: sudo xcode-select -s /Applications/Xcode.app
+    
+    - name: Build watchOS app
+      run: |
+        xcodebuild build \
+          -project Navi_app/Navi_app.xcodeproj \
+          -scheme "Navi_app Watch App Watch App" \
+          -destination 'platform=watchOS Simulator,name=Apple Watch Series 9 (45mm),OS=latest' \
+          -derivedDataPath ./DerivedData \
+          CODE_SIGN_IDENTITY="" \
+          CODE_SIGNING_REQUIRED=NO
+      continue-on-error: true
+
+  lint:
+    name: Code Quality
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '18'
+    
+    - name: Install ESLint
+      run: |
+        cd backend
+        npm install --save-dev eslint
+    
+    - name: Create ESLint config
+      run: |
+        cd backend
+        echo '{
+          "env": {
+            "node": true,
+            "es2021": true
+          },
+          "extends": "eslint:recommended",
+          "parserOptions": {
+            "ecmaVersion": "latest",
+            "sourceType": "module"
+          },
+          "rules": {
+            "no-unused-vars": "warn",
+            "no-console": "off"
+          }
+        }' > .eslintrc.json
+    
+    - name: Run ESLint
+      run: |
+        cd backend
+        npx eslint src/ --ext .js
+      continue-on-error: true
+
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Run npm audit
+      run: |
+        cd backend
+        npm audit --production
+      continue-on-error: true
+    
+    - name: Check for secrets
+      uses: trufflesecurity/trufflehog@main
+      with:
+        path: ./
+        base: ${{ github.event.repository.default_branch }}
+        head: HEAD

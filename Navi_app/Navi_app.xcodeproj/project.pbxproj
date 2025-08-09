@@ -1,0 +1,1041 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		90D0F4942E468B2A005A2481 /* Navi_app Watch App Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 90D0F4932E468B2A005A2481 /* Navi_app Watch App Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		905716362E46186F007B5377 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9057161F2E46186C007B5377 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 905716262E46186C007B5377;
+			remoteInfo = Navi_app;
+		};
+		905716402E46186F007B5377 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9057161F2E46186C007B5377 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 905716262E46186C007B5377;
+			remoteInfo = Navi_app;
+		};
+		90D0F4952E468B2A005A2481 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9057161F2E46186C007B5377 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 90D0F4922E468B2A005A2481;
+			remoteInfo = "Navi_app Watch App Watch App";
+		};
+		90D0F4A32E468B2C005A2481 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9057161F2E46186C007B5377 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 90D0F4922E468B2A005A2481;
+			remoteInfo = "Navi_app Watch App Watch App";
+		};
+		90D0F4AD2E468B2C005A2481 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9057161F2E46186C007B5377 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 90D0F4922E468B2A005A2481;
+			remoteInfo = "Navi_app Watch App Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		90D0F4B62E468B2C005A2481 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				90D0F4942E468B2A005A2481 /* Navi_app Watch App Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		905716272E46186C007B5377 /* Navi_app.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navi_app.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		905716352E46186F007B5377 /* Navi_appTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Navi_appTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9057163F2E46186F007B5377 /* Navi_appUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Navi_appUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		90D0F48E2E468B2A005A2481 /* Navi_app Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Navi_app Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90D0F4932E468B2A005A2481 /* Navi_app Watch App Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Navi_app Watch App Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90D0F4A22E468B2C005A2481 /* Navi_app Watch App Watch AppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Navi_app Watch App Watch AppTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		90D0F4AC2E468B2C005A2481 /* Navi_app Watch App Watch AppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Navi_app Watch App Watch AppUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		905716292E46186C007B5377 /* Navi_app */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Navi_app;
+			sourceTree = "<group>";
+		};
+		905716382E46186F007B5377 /* Navi_appTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Navi_appTests;
+			sourceTree = "<group>";
+		};
+		905716422E46186F007B5377 /* Navi_appUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Navi_appUITests;
+			sourceTree = "<group>";
+		};
+		90D0F4972E468B2A005A2481 /* Navi_app Watch App Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Navi_app Watch App Watch App";
+			sourceTree = "<group>";
+		};
+		90D0F4A52E468B2C005A2481 /* Navi_app Watch App Watch AppTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Navi_app Watch App Watch AppTests";
+			sourceTree = "<group>";
+		};
+		90D0F4AF2E468B2C005A2481 /* Navi_app Watch App Watch AppUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "Navi_app Watch App Watch AppUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		905716242E46186C007B5377 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		905716322E46186F007B5377 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9057163C2E46186F007B5377 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90D0F4902E468B2A005A2481 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90D0F49F2E468B2C005A2481 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90D0F4A92E468B2C005A2481 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		9057161E2E46186C007B5377 = {
+			isa = PBXGroup;
+			children = (
+				905716292E46186C007B5377 /* Navi_app */,
+				905716382E46186F007B5377 /* Navi_appTests */,
+				905716422E46186F007B5377 /* Navi_appUITests */,
+				90D0F4972E468B2A005A2481 /* Navi_app Watch App Watch App */,
+				90D0F4A52E468B2C005A2481 /* Navi_app Watch App Watch AppTests */,
+				90D0F4AF2E468B2C005A2481 /* Navi_app Watch App Watch AppUITests */,
+				905716282E46186C007B5377 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		905716282E46186C007B5377 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				905716272E46186C007B5377 /* Navi_app.app */,
+				905716352E46186F007B5377 /* Navi_appTests.xctest */,
+				9057163F2E46186F007B5377 /* Navi_appUITests.xctest */,
+				90D0F48E2E468B2A005A2481 /* Navi_app Watch App.app */,
+				90D0F4932E468B2A005A2481 /* Navi_app Watch App Watch App.app */,
+				90D0F4A22E468B2C005A2481 /* Navi_app Watch App Watch AppTests.xctest */,
+				90D0F4AC2E468B2C005A2481 /* Navi_app Watch App Watch AppUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		905716262E46186C007B5377 /* Navi_app */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 905716492E46186F007B5377 /* Build configuration list for PBXNativeTarget "Navi_app" */;
+			buildPhases = (
+				905716232E46186C007B5377 /* Sources */,
+				905716242E46186C007B5377 /* Frameworks */,
+				905716252E46186C007B5377 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				905716292E46186C007B5377 /* Navi_app */,
+			);
+			name = Navi_app;
+			packageProductDependencies = (
+			);
+			productName = Navi_app;
+			productReference = 905716272E46186C007B5377 /* Navi_app.app */;
+			productType = "com.apple.product-type.application";
+		};
+		905716342E46186F007B5377 /* Navi_appTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9057164C2E46186F007B5377 /* Build configuration list for PBXNativeTarget "Navi_appTests" */;
+			buildPhases = (
+				905716312E46186F007B5377 /* Sources */,
+				905716322E46186F007B5377 /* Frameworks */,
+				905716332E46186F007B5377 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				905716372E46186F007B5377 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				905716382E46186F007B5377 /* Navi_appTests */,
+			);
+			name = Navi_appTests;
+			packageProductDependencies = (
+			);
+			productName = Navi_appTests;
+			productReference = 905716352E46186F007B5377 /* Navi_appTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9057163E2E46186F007B5377 /* Navi_appUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9057164F2E46186F007B5377 /* Build configuration list for PBXNativeTarget "Navi_appUITests" */;
+			buildPhases = (
+				9057163B2E46186F007B5377 /* Sources */,
+				9057163C2E46186F007B5377 /* Frameworks */,
+				9057163D2E46186F007B5377 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				905716412E46186F007B5377 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				905716422E46186F007B5377 /* Navi_appUITests */,
+			);
+			name = Navi_appUITests;
+			packageProductDependencies = (
+			);
+			productName = Navi_appUITests;
+			productReference = 9057163F2E46186F007B5377 /* Navi_appUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		90D0F48D2E468B2A005A2481 /* Navi_app Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 90D0F4BE2E468B2C005A2481 /* Build configuration list for PBXNativeTarget "Navi_app Watch App" */;
+			buildPhases = (
+				90D0F48C2E468B2A005A2481 /* Resources */,
+				90D0F4B62E468B2C005A2481 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				90D0F4962E468B2A005A2481 /* PBXTargetDependency */,
+			);
+			name = "Navi_app Watch App";
+			packageProductDependencies = (
+			);
+			productName = "Navi_app Watch App";
+			productReference = 90D0F48E2E468B2A005A2481 /* Navi_app Watch App.app */;
+			productType = "com.apple.product-type.application.watchapp2-container";
+		};
+		90D0F4922E468B2A005A2481 /* Navi_app Watch App Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 90D0F4BD2E468B2C005A2481 /* Build configuration list for PBXNativeTarget "Navi_app Watch App Watch App" */;
+			buildPhases = (
+				90D0F48F2E468B2A005A2481 /* Sources */,
+				90D0F4902E468B2A005A2481 /* Frameworks */,
+				90D0F4912E468B2A005A2481 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				90D0F4972E468B2A005A2481 /* Navi_app Watch App Watch App */,
+			);
+			name = "Navi_app Watch App Watch App";
+			packageProductDependencies = (
+			);
+			productName = "Navi_app Watch App Watch App";
+			productReference = 90D0F4932E468B2A005A2481 /* Navi_app Watch App Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+		90D0F4A12E468B2C005A2481 /* Navi_app Watch App Watch AppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 90D0F4BF2E468B2C005A2481 /* Build configuration list for PBXNativeTarget "Navi_app Watch App Watch AppTests" */;
+			buildPhases = (
+				90D0F49E2E468B2C005A2481 /* Sources */,
+				90D0F49F2E468B2C005A2481 /* Frameworks */,
+				90D0F4A02E468B2C005A2481 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				90D0F4A42E468B2C005A2481 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				90D0F4A52E468B2C005A2481 /* Navi_app Watch App Watch AppTests */,
+			);
+			name = "Navi_app Watch App Watch AppTests";
+			packageProductDependencies = (
+			);
+			productName = "Navi_app Watch App Watch AppTests";
+			productReference = 90D0F4A22E468B2C005A2481 /* Navi_app Watch App Watch AppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		90D0F4AB2E468B2C005A2481 /* Navi_app Watch App Watch AppUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 90D0F4C02E468B2C005A2481 /* Build configuration list for PBXNativeTarget "Navi_app Watch App Watch AppUITests" */;
+			buildPhases = (
+				90D0F4A82E468B2C005A2481 /* Sources */,
+				90D0F4A92E468B2C005A2481 /* Frameworks */,
+				90D0F4AA2E468B2C005A2481 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				90D0F4AE2E468B2C005A2481 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				90D0F4AF2E468B2C005A2481 /* Navi_app Watch App Watch AppUITests */,
+			);
+			name = "Navi_app Watch App Watch AppUITests";
+			packageProductDependencies = (
+			);
+			productName = "Navi_app Watch App Watch AppUITests";
+			productReference = 90D0F4AC2E468B2C005A2481 /* Navi_app Watch App Watch AppUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9057161F2E46186C007B5377 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					905716262E46186C007B5377 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					905716342E46186F007B5377 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 905716262E46186C007B5377;
+					};
+					9057163E2E46186F007B5377 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 905716262E46186C007B5377;
+					};
+					90D0F48D2E468B2A005A2481 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					90D0F4922E468B2A005A2481 = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					90D0F4A12E468B2C005A2481 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 90D0F4922E468B2A005A2481;
+					};
+					90D0F4AB2E468B2C005A2481 = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 90D0F4922E468B2A005A2481;
+					};
+				};
+			};
+			buildConfigurationList = 905716222E46186C007B5377 /* Build configuration list for PBXProject "Navi_app" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 9057161E2E46186C007B5377;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 905716282E46186C007B5377 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				905716262E46186C007B5377 /* Navi_app */,
+				905716342E46186F007B5377 /* Navi_appTests */,
+				9057163E2E46186F007B5377 /* Navi_appUITests */,
+				90D0F48D2E468B2A005A2481 /* Navi_app Watch App */,
+				90D0F4922E468B2A005A2481 /* Navi_app Watch App Watch App */,
+				90D0F4A12E468B2C005A2481 /* Navi_app Watch App Watch AppTests */,
+				90D0F4AB2E468B2C005A2481 /* Navi_app Watch App Watch AppUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		905716252E46186C007B5377 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		905716332E46186F007B5377 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9057163D2E46186F007B5377 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90D0F48C2E468B2A005A2481 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90D0F4912E468B2A005A2481 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90D0F4A02E468B2C005A2481 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90D0F4AA2E468B2C005A2481 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		905716232E46186C007B5377 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		905716312E46186F007B5377 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9057163B2E46186F007B5377 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90D0F48F2E468B2A005A2481 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90D0F49E2E468B2C005A2481 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		90D0F4A82E468B2C005A2481 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		905716372E46186F007B5377 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 905716262E46186C007B5377 /* Navi_app */;
+			targetProxy = 905716362E46186F007B5377 /* PBXContainerItemProxy */;
+		};
+		905716412E46186F007B5377 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 905716262E46186C007B5377 /* Navi_app */;
+			targetProxy = 905716402E46186F007B5377 /* PBXContainerItemProxy */;
+		};
+		90D0F4962E468B2A005A2481 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 90D0F4922E468B2A005A2481 /* Navi_app Watch App Watch App */;
+			targetProxy = 90D0F4952E468B2A005A2481 /* PBXContainerItemProxy */;
+		};
+		90D0F4A42E468B2C005A2481 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 90D0F4922E468B2A005A2481 /* Navi_app Watch App Watch App */;
+			targetProxy = 90D0F4A32E468B2C005A2481 /* PBXContainerItemProxy */;
+		};
+		90D0F4AE2E468B2C005A2481 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 90D0F4922E468B2A005A2481 /* Navi_app Watch App Watch App */;
+			targetProxy = 90D0F4AD2E468B2C005A2481 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		905716472E46186F007B5377 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		905716482E46186F007B5377 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		9057164A2E46186F007B5377 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Navi_app/Navi_app.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Rosenbaum.Navi-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Debug;
+		};
+		9057164B2E46186F007B5377 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Navi_app/Navi_app.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Rosenbaum.Navi-app";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Release;
+		};
+		9057164D2E46186F007B5377 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Rosenbaum.Navi-appTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Navi_app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Navi_app";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Debug;
+		};
+		9057164E2E46186F007B5377 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Rosenbaum.Navi-appTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Navi_app.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Navi_app";
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Release;
+		};
+		905716502E46186F007B5377 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Rosenbaum.Navi-appUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = Navi_app;
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Debug;
+		};
+		905716512E46186F007B5377 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.5;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Rosenbaum.Navi-appUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = auto;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx xros xrsimulator";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2,7";
+				TEST_TARGET_NAME = Navi_app;
+				XROS_DEPLOYMENT_TARGET = 2.5;
+			};
+			name = Release;
+		};
+		90D0F4B42E468B2C005A2481 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_KEY_CFBundleDisplayName = "Navi_app Watch App";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Rosenbaum.Navi-app-Watch-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		90D0F4B52E468B2C005A2481 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				INFOPLIST_KEY_CFBundleDisplayName = "Navi_app Watch App";
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Rosenbaum.Navi-app-Watch-App";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_VERSION = 5.0;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		90D0F4B72E468B2C005A2481 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Navi_app Watch App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKWatchOnly = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Rosenbaum.Navi-app-Watch-App.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 11.5;
+			};
+			name = Debug;
+		};
+		90D0F4B82E468B2C005A2481 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Navi_app Watch App";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKWatchOnly = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Rosenbaum.Navi-app-Watch-App.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 11.5;
+			};
+			name = Release;
+		};
+		90D0F4B92E468B2C005A2481 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Rosenbaum.Navi-app-Watch-App-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Navi_app Watch App Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Navi_app Watch App Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.5;
+			};
+			name = Debug;
+		};
+		90D0F4BA2E468B2C005A2481 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Rosenbaum.Navi-app-Watch-App-Watch-AppTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Navi_app Watch App Watch App.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Navi_app Watch App Watch App";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 11.5;
+			};
+			name = Release;
+		};
+		90D0F4BB2E468B2C005A2481 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Rosenbaum.Navi-app-Watch-App-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Navi_app Watch App Watch App";
+				WATCHOS_DEPLOYMENT_TARGET = 11.5;
+			};
+			name = Debug;
+		};
+		90D0F4BC2E468B2C005A2481 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Rosenbaum.Navi-app-Watch-App-Watch-AppUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				TEST_TARGET_NAME = "Navi_app Watch App Watch App";
+				VALIDATE_PRODUCT = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 11.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		905716222E46186C007B5377 /* Build configuration list for PBXProject "Navi_app" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				905716472E46186F007B5377 /* Debug */,
+				905716482E46186F007B5377 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		905716492E46186F007B5377 /* Build configuration list for PBXNativeTarget "Navi_app" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9057164A2E46186F007B5377 /* Debug */,
+				9057164B2E46186F007B5377 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9057164C2E46186F007B5377 /* Build configuration list for PBXNativeTarget "Navi_appTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9057164D2E46186F007B5377 /* Debug */,
+				9057164E2E46186F007B5377 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		9057164F2E46186F007B5377 /* Build configuration list for PBXNativeTarget "Navi_appUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				905716502E46186F007B5377 /* Debug */,
+				905716512E46186F007B5377 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		90D0F4BD2E468B2C005A2481 /* Build configuration list for PBXNativeTarget "Navi_app Watch App Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90D0F4B72E468B2C005A2481 /* Debug */,
+				90D0F4B82E468B2C005A2481 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		90D0F4BE2E468B2C005A2481 /* Build configuration list for PBXNativeTarget "Navi_app Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90D0F4B42E468B2C005A2481 /* Debug */,
+				90D0F4B52E468B2C005A2481 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		90D0F4BF2E468B2C005A2481 /* Build configuration list for PBXNativeTarget "Navi_app Watch App Watch AppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90D0F4B92E468B2C005A2481 /* Debug */,
+				90D0F4BA2E468B2C005A2481 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		90D0F4C02E468B2C005A2481 /* Build configuration list for PBXNativeTarget "Navi_app Watch App Watch AppUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				90D0F4BB2E468B2C005A2481 /* Debug */,
+				90D0F4BC2E468B2C005A2481 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9057161F2E46186C007B5377 /* Project object */;
+}
