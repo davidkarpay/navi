@@ -6,7 +6,7 @@ class AuthManager: ObservableObject {
     @Published var userId: String?
     @Published var authToken: String?
     
-    private let baseURL = ProcessInfo.processInfo.environment["API_URL"] ?? "https://lovely-vibrancy-production-2c30.up.railway.app"
+    private let baseURL = ProcessInfo.processInfo.environment["API_URL"] ?? "https://navi-production-97dd.up.railway.app"
     private let userDefaults = UserDefaults.standard
     
     init() {

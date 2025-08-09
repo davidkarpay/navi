@@ -6,7 +6,7 @@ class PairingManager: ObservableObject {
     @Published var partnerId: String?
     @Published var pairedAt: Date?
     
-    private let baseURL = ProcessInfo.processInfo.environment["API_URL"] ?? "https://lovely-vibrancy-production-2c30.up.railway.app"
+    private let baseURL = ProcessInfo.processInfo.environment["API_URL"] ?? "https://navi-production-97dd.up.railway.app"
     private var authToken: String? {
         UserDefaults.standard.string(forKey: "authToken")
     }
@@ -122,11 +122,21 @@ class PairingManager: ObservableObject {
         
         var urlComponents = URLComponents(string: baseURL)!
         urlComponents.scheme = urlComponents.scheme == "https" ? "wss" : "ws"
-        urlComponents.queryItems = [URLQueryItem(name: "token", value: authToken)]
         
         let session = URLSession(configuration: .default)
         webSocketTask = session.webSocketTask(with: urlComponents.url!)
         webSocketTask?.resume()
+        
+        // Send authentication message
+        let authMessage = ["type": "auth", "token": authToken]
+        if let authData = try? JSONSerialization.data(withJSONObject: authMessage),
+           let authString = String(data: authData, encoding: .utf8) {
+            webSocketTask?.send(.string(authString)) { error in
+                if let error = error {
+                    print("Auth message send error: \(error)")
+                }
+            }
+        }
         
         receiveMessage()
     }
@@ -156,22 +166,29 @@ class PairingManager: ObservableObject {
     }
     
     private func handleWebSocketMessage(_ text: String) {
-        guard let data = text.data(using: .utf8),
-              let message = try? JSONDecoder().decode(WebSocketMessage.self, from: data) else {
-            return
-        }
+        guard let data = text.data(using: .utf8) else { return }
         
-        DispatchQueue.main.async {
-            switch message.type {
-            case "paired":
-                self.isPaired = true
-                self.checkPairingStatus()
-            case "unpaired":
-                self.isPaired = false
-                self.partnerId = nil
-                self.pairedAt = nil
-            default:
-                break
+        // Try to decode as WebSocketMessage first
+        if let message = try? JSONDecoder().decode(WebSocketMessage.self, from: data) {
+            DispatchQueue.main.async {
+                switch message.type {
+                case "auth_success":
+                    print("WebSocket authenticated successfully")
+                case "paired":
+                    self.isPaired = true
+                    self.checkPairingStatus()
+                case "unpaired":
+                    self.isPaired = false
+                    self.partnerId = nil
+                    self.pairedAt = nil
+                case "tap_received":
+                    // Handle as tap message - decode as TapMessage
+                    if let tapMessage = try? JSONDecoder().decode(TapMessage.self, from: data) {
+                        NotificationCenter.default.post(name: .tapReceived, object: tapMessage)
+                    }
+                default:
+                    break
+                }
             }
         }
     }
@@ -195,5 +212,11 @@ struct JoinResponse: Codable {
 
 struct WebSocketMessage: Codable {
     let type: String
-    let timestamp: String
+    let timestamp: String?
+    let message: String?
+}
+
+// Notification extension
+extension Notification.Name {
+    static let tapReceived = Notification.Name("tapReceived")
 }
