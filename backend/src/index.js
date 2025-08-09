@@ -41,8 +41,8 @@ initAPNs();
 
 // Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/pairing', authenticateToken, pairingRoutes);
-app.use('/api/tap', authenticateToken, tapRoutes);
+app.use('/api/pairing', pairingRoutes);
+app.use('/api/tap', tapRoutes);
 
 // Health check
 app.get('/health', (req, res) => {
