@@ -2,6 +2,8 @@ import SwiftUI
 
 @main
 struct NaviApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+
     @StateObject private var authManager = AuthManager()
     @StateObject private var pairingManager = PairingManager()
     @StateObject private var notificationManager = NotificationManager()
