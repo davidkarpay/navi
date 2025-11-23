@@ -1,11 +1,8 @@
 import express from 'express';
 import { authenticateToken } from '../middleware/auth.js';
+import { getDb } from '../db/init.js';
 
 const router = express.Router();
-
-// In-memory pairing storage
-const activePairings = new Map(); // userId -> pairingInfo
-const pairingCodes = new Map(); // code -> creatorUserId
 
 // Generate 6-digit pairing code
 function generatePairingCode() {
@@ -13,25 +10,22 @@ function generatePairingCode() {
 }
 
 // Create pairing code
-router.post('/create', authenticateToken, (req, res) => {
+router.post('/create', authenticateToken, async (req, res) => {
     try {
+        const db = getDb();
         const { userId } = req.user;
-        
-        // Remove any existing pairing for this user
-        for (const [code, creatorId] of pairingCodes.entries()) {
-            if (creatorId === userId) {
-                pairingCodes.delete(code);
-            }
-        }
-        
+
+        // Remove any existing pairing codes for this user
+        await db.run('DELETE FROM pairing_codes WHERE creator_user_id = ?', [userId]);
+
         const pairingCode = generatePairingCode();
-        pairingCodes.set(pairingCode, userId);
-        
-        // Clean up code after 10 minutes
-        setTimeout(() => {
-            pairingCodes.delete(pairingCode);
-        }, 10 * 60 * 1000);
-        
+        const expiresAt = new Date(Date.now() + 10 * 60 * 1000); // 10 minutes from now
+
+        await db.run(
+            'INSERT INTO pairing_codes (code, creator_user_id, expires_at) VALUES (?, ?, ?)',
+            [pairingCode, userId, expiresAt.toISOString()]
+        );
+
         res.json({
             pairingCode,
             expiresIn: 600 // 10 minutes in seconds
@@ -43,47 +37,53 @@ router.post('/create', authenticateToken, (req, res) => {
 });
 
 // Join with pairing code
-router.post('/join', authenticateToken, (req, res) => {
+router.post('/join', authenticateToken, async (req, res) => {
     try {
+        const db = getDb();
         const { userId } = req.user;
         const { pairingCode } = req.body;
-        
+
         if (!pairingCode || pairingCode.length !== 6) {
             return res.status(400).json({ error: 'Invalid pairing code format' });
         }
-        
-        const creatorUserId = pairingCodes.get(pairingCode);
-        if (!creatorUserId) {
+
+        // Look up the pairing code
+        const codeRecord = await db.get(
+            'SELECT creator_user_id, expires_at FROM pairing_codes WHERE code = ?',
+            [pairingCode]
+        );
+
+        if (!codeRecord) {
             return res.status(404).json({ error: 'Pairing code not found or expired' });
         }
-        
+
+        // Check if code has expired
+        if (new Date(codeRecord.expires_at) < new Date()) {
+            await db.run('DELETE FROM pairing_codes WHERE code = ?', [pairingCode]);
+            return res.status(404).json({ error: 'Pairing code not found or expired' });
+        }
+
+        const creatorUserId = codeRecord.creator_user_id;
+
         if (creatorUserId === userId) {
             return res.status(400).json({ error: 'Cannot pair with yourself' });
         }
-        
-        // Create pairing for both users
-        const pairingInfo = {
-            partnerId: creatorUserId,
-            pairedAt: new Date(),
-            pairingCode
-        };
-        
-        const creatorPairingInfo = {
-            partnerId: userId,
-            pairedAt: new Date(),
-            pairingCode
-        };
-        
-        activePairings.set(userId, pairingInfo);
-        activePairings.set(creatorUserId, creatorPairingInfo);
-        
+
+        // Create pairing for both users (delete existing first)
+        await db.run('DELETE FROM pairings WHERE user_id IN (?, ?)', [userId, creatorUserId]);
+
+        await db.run(
+            'INSERT INTO pairings (user_id, partner_id) VALUES (?, ?), (?, ?)',
+            [userId, creatorUserId, creatorUserId, userId]
+        );
+
         // Remove the used pairing code
-        pairingCodes.delete(pairingCode);
-        
+        await db.run('DELETE FROM pairing_codes WHERE code = ?', [pairingCode]);
+
         res.json({
             message: 'Successfully paired',
             partnerId: creatorUserId,
-            pairedAt: pairingInfo.pairedAt
+            pairedAt: new Date()
         });
     } catch (error) {
         console.error('Join pairing error:', error);
@@ -92,11 +92,16 @@ router.post('/join', authenticateToken, (req, res) => {
 });
 
 // Get pairing status
-router.get('/status', authenticateToken, (req, res) => {
+router.get('/status', authenticateToken, async (req, res) => {
     try {
+        const db = getDb();
         const { userId } = req.user;
-        const pairing = activePairings.get(userId);
-        
+
+        const pairing = await db.get(
+            'SELECT partner_id, created_at FROM pairings WHERE user_id = ?',
+            [userId]
+        );
+
         if (!pairing) {
             return res.json({
                 paired: false,
@@ -104,11 +109,11 @@ router.get('/status', authenticateToken, (req, res) => {
                 pairedAt: null
             });
         }
-        
+
         res.json({
             paired: true,
-            partnerId: pairing.partnerId,
-            pairedAt: pairing.pairedAt
+            partnerId: pairing.partner_id,
+            pairedAt: pairing.created_at
         });
     } catch (error) {
         console.error('Status check error:', error);
@@ -117,17 +122,24 @@ router.get('/status', authenticateToken, (req, res) => {
 });
 
 // Unpair
-router.delete('/unpair', authenticateToken, (req, res) => {
+router.delete('/unpair', authenticateToken, async (req, res) => {
     try {
+        const db = getDb();
         const { userId } = req.user;
-        const pairing = activePairings.get(userId);
-        
+
+        const pairing = await db.get(
+            'SELECT partner_id FROM pairings WHERE user_id = ?',
+            [userId]
+        );
+
         if (pairing) {
             // Remove pairing for both users
-            activePairings.delete(userId);
-            activePairings.delete(pairing.partnerId);
+            await db.run(
+                'DELETE FROM pairings WHERE user_id IN (?, ?)',
+                [userId, pairing.partner_id]
+            );
         }
-        
+
         res.json({ message: 'Successfully unpaired' });
     } catch (error) {
         console.error('Unpair error:', error);
@@ -135,6 +147,4 @@ router.delete('/unpair', authenticateToken, (req, res) => {
     }
 });
 
-// Export for other modules
-export { activePairings };
 export default router;
