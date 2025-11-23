@@ -75,7 +75,6 @@ jobs:
           CODE_SIGN_IDENTITY="" \
           CODE_SIGNING_REQUIRED=NO \
           | xcpretty --report junit --output test-results/ios-tests.xml
-      continue-on-error: true
     
     - name: Upload test results
       uses: actions/upload-artifact@v3
@@ -103,7 +102,6 @@ jobs:
           -derivedDataPath ./DerivedData \
           CODE_SIGN_IDENTITY="" \
           CODE_SIGNING_REQUIRED=NO
-      continue-on-error: true
 
   lint:
     name: Code Quality
@@ -145,7 +143,6 @@ jobs:
       run: |
         cd backend
         npx eslint src/ --ext .js
-      continue-on-error: true
 
   security-scan:
     name: Security Scan
@@ -157,8 +154,7 @@ jobs:
     - name: Run npm audit
       run: |
         cd backend
-        npm audit --production
-      continue-on-error: true
+        npm audit --production --audit-level=high
     
     - name: Check for secrets
       uses: trufflesecurity/trufflehog@main

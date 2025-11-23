@@ -97,4 +97,3 @@ jobs:
           --apiKey $APP_STORE_CONNECT_API_KEY_ID \
           --apiIssuer $APP_STORE_CONNECT_ISSUER_ID \
           --apiKeyPath $RUNNER_TEMP/api_key.p8
-      continue-on-error: true
