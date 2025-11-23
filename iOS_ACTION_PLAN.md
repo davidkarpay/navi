@@ -137,8 +137,7 @@ Transform the iOS companion app from a broken prototype with critical missing fe
        if let userId = UserDefaults.standard.string(forKey: "userId"),
           let authToken = UserDefaults.standard.string(forKey: "authToken") {
 
-           let baseURL = ProcessInfo.processInfo.environment["API_URL"]
-                        ?? "https://navi-production-97dd.up.railway.app"
+           let baseURL = Constants.backendURL
 
            guard let url = URL(string: "\(baseURL)/api/auth/device-token") else { return }
 
