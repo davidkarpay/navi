@@ -1,10 +1,11 @@
 import Foundation
 import SwiftUI
+import NaviShared
 
 class TapManager: ObservableObject {
     @Published var recentTaps: [TapMessage] = []
-    
-    private let baseURL = ProcessInfo.processInfo.environment["API_URL"] ?? "https://navi-production-97dd.up.railway.app"
+
+    private let baseURL = Constants.backendURL
     private var authToken: String? {
         UserDefaults.standard.string(forKey: "authToken")
     }

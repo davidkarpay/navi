@@ -1,12 +1,13 @@
 import Foundation
 import SwiftUI
+import NaviShared
 
 class PairingManager: ObservableObject {
     @Published var isPaired = false
     @Published var partnerId: String?
     @Published var pairedAt: Date?
-    
-    private let baseURL = ProcessInfo.processInfo.environment["API_URL"] ?? "https://navi-production-97dd.up.railway.app"
+
+    private let baseURL = Constants.backendURL
     private var authToken: String? {
         UserDefaults.standard.string(forKey: "authToken")
     }

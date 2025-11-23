@@ -60,7 +60,7 @@ class AuthManagerTests: XCTestCase {
     
     func testBaseURLFromEnvironment() {
         // The base URL should use the default production URL
-        let expectedURL = "https://navi-production-97dd.up.railway.app"
+        let expectedURL = "https://lovely-vibrancy-production-2c30.up.railway.app"
         XCTAssertEqual(authManager.baseURL, expectedURL)
     }
 }

@@ -1,13 +1,14 @@
 import Foundation
 import SwiftUI
+import NaviShared
 
 class AuthManager: ObservableObject {
     @Published var isAuthenticated = false
     @Published var userId: String?
     @Published var authToken: String?
-    
+
     var baseURL: String {
-        return ProcessInfo.processInfo.environment["API_URL"] ?? "https://navi-production-97dd.up.railway.app"
+        return Constants.backendURL
     }
     private let userDefaults = UserDefaults.standard
     
