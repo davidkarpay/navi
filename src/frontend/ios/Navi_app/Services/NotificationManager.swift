@@ -6,7 +6,7 @@ class NotificationManager: ObservableObject {
     static let shared = NotificationManager()
     
     @Published var isAuthorized = false
-    private var deviceToken: String?
+    var deviceToken: String?
     
     func requestAuthorization() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { granted, error in

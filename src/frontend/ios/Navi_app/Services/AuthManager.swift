@@ -25,10 +25,9 @@ class AuthManager: ObservableObject {
     }
     
     func registerAnonymousUser() async {
-        guard let deviceToken = await NotificationManager.shared.getDeviceToken() else {
-            print("Failed to get device token")
-            return
-        }
+        // Use mock token for simulator if real token unavailable
+        let deviceToken = await NotificationManager.shared.getDeviceToken()
+            ?? "simulator_\(UUID().uuidString)"
         
         do {
             let url = URL(string: "\(baseURL)/api/auth/register")!

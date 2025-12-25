@@ -6,7 +6,7 @@ enum PairingRole: String {
     case receiver
 }
 
-class PairingManager: ObservableObject {
+class PairingManagerLocal: ObservableObject {
     @Published var isPaired = false
     @Published var pairedUserId: String?
     @Published var pairingRole: PairingRole?

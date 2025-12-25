@@ -1,14 +1,30 @@
 import Foundation
 import SwiftUI
+import Combine
 
 class TapManager: ObservableObject {
     @Published var recentTaps: [TapMessage] = []
-    
+
+    private var cancellables = Set<AnyCancellable>()
     private let baseURL = ProcessInfo.processInfo.environment["API_URL"] ?? "https://navi-production-97dd.up.railway.app"
     private var authToken: String? {
         UserDefaults.standard.string(forKey: "authToken")
     }
-    
+
+    init() {
+        setupNotificationObserver()
+    }
+
+    private func setupNotificationObserver() {
+        NotificationCenter.default.publisher(for: .tapReceived)
+            .compactMap { $0.object as? TapMessage }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] tapMessage in
+                self?.handleIncomingTap(tapMessage)
+            }
+            .store(in: &cancellables)
+    }
+
     func sendTap(intensity: String = "medium", pattern: String = "single") async -> Bool {
         guard let authToken = authToken else { return false }
         
@@ -111,4 +127,23 @@ struct TapResponse: Codable {
 struct TapHistoryResponse: Codable {
     let taps: [TapMessage]
     let count: Int
+}
+
+// Local TapMessage definition (mirrors shared/Models/TapMessage.swift)
+struct TapMessage: Codable, Identifiable {
+    let fromUserId: String
+    let toUserId: String
+    let intensity: String
+    let pattern: String
+    let timestamp: String
+    let id: String
+
+    init(fromUserId: String, toUserId: String, intensity: String = "medium", pattern: String = "single", timestamp: String = ISO8601DateFormatter().string(from: Date()), id: String = UUID().uuidString) {
+        self.fromUserId = fromUserId
+        self.toUserId = toUserId
+        self.intensity = intensity
+        self.pattern = pattern
+        self.timestamp = timestamp
+        self.id = id
+    }
 }
