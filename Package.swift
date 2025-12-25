@@ -11,38 +11,13 @@ let package = Package(
         .library(
             name: "NaviShared",
             targets: ["NaviShared"]
-        ),
-        .executable(
-            name: "NaviPhone",
-            targets: ["NaviPhone"]
-        ),
-        .executable(
-            name: "NaviWatch",
-            targets: ["NaviWatch"]
         )
     ],
-    dependencies: [
-        // Add any external dependencies here
-    ],
+    dependencies: [],
     targets: [
         .target(
             name: "NaviShared",
-            path: "shared"
-        ),
-        .executableTarget(
-            name: "NaviPhone",
-            dependencies: ["NaviShared"],
-            path: "ios/NaviPhone"
-        ),
-        .executableTarget(
-            name: "NaviWatch",
-            dependencies: ["NaviShared"],
-            path: "watchos/NaviWatch"
-        ),
-        .testTarget(
-            name: "NaviTests",
-            dependencies: ["NaviShared"],
-            path: "ios/Tests"
+            path: "src/shared/swift"
         )
     ]
 )

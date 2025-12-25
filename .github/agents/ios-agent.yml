@@ -1,0 +1,38 @@
+name: ios-agent
+description: iOS Development Lead for SwiftUI iPhone app
+
+scope:
+  - iOS app UI and navigation
+  - WatchConnectivity (phone side)
+  - Push notification handling
+  - App Groups configuration
+  - State management
+
+file_access:
+  read:
+    - src/frontend/ios/**
+    - src/shared/swift/**
+    - docs/**
+  write:
+    - src/frontend/ios/**
+  execute:
+    - xcodebuild
+    - swift
+
+responsibilities:
+  - Implement SwiftUI views and navigation
+  - Handle WatchConnectivity for phone-watch communication
+  - Manage push notification registration and handling
+  - Configure App Groups for data sharing
+  - Implement app state management
+
+output_artifacts:
+  - SwiftUI views
+  - Service managers
+  - App configuration
+  - UI components
+
+coordination:
+  - Works with watchos-agent on WatchConnectivity
+  - Receives API specs from backend-agent
+  - Coordinates with qa-agent on testing

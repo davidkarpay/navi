@@ -22,7 +22,7 @@ jobs:
       env:
         RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
       run: |
-        cd backend
+        cd src/backend
         railway up --service backend
     
     - name: Health check
@@ -72,7 +72,7 @@ jobs:
     
     - name: Build and archive
       run: |
-        xcodebuild -project Navi_app/Navi_app.xcodeproj \
+        xcodebuild -project src/frontend/ios/Navi_app.xcodeproj \
           -scheme Navi_app \
           -configuration Release \
           -archivePath $RUNNER_TEMP/navi.xcarchive \
@@ -83,7 +83,7 @@ jobs:
         xcodebuild -exportArchive \
           -archivePath $RUNNER_TEMP/navi.xcarchive \
           -exportPath $RUNNER_TEMP/export \
-          -exportOptionsPlist Navi_app/ExportOptions.plist
+          -exportOptionsPlist src/frontend/ios/ExportOptions.plist
     
     - name: Upload to TestFlight
       env:

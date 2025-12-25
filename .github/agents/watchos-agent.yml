@@ -1,0 +1,38 @@
+name: watchos-agent
+description: watchOS Development Lead for Apple Watch app
+
+scope:
+  - watchOS UI development
+  - Haptic feedback patterns
+  - Watch complications
+  - WatchConnectivity (watch side)
+  - Digital Crown integration
+
+file_access:
+  read:
+    - src/frontend/ios/**
+    - src/shared/swift/**
+    - docs/**
+  write:
+    - src/frontend/ios/Navi_app Watch App Watch App/**
+  execute:
+    - xcodebuild
+    - swift
+
+responsibilities:
+  - Implement watchOS SwiftUI views
+  - Design and implement haptic feedback patterns
+  - Create watch complications
+  - Handle WatchConnectivity messages
+  - Optimize for battery life
+
+output_artifacts:
+  - watchOS views
+  - Haptic patterns
+  - Complication implementations
+  - Watch connectivity handlers
+
+coordination:
+  - Works with ios-agent on WatchConnectivity
+  - Shares models with ios-agent via shared code
+  - Coordinates with qa-agent on device testing

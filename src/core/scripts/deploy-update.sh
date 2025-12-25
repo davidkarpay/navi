@@ -13,9 +13,9 @@ BLUE='\033[0;34m'
 NC='\033[0m' # No Color
 
 # Configuration
-PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-BACKEND_DIR="$PROJECT_ROOT/backend"
-IOS_PROJECT="$PROJECT_ROOT/Navi_app/Navi_app.xcodeproj"
+PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../../.." && pwd)"
+BACKEND_DIR="$PROJECT_ROOT/src/backend"
+IOS_PROJECT="$PROJECT_ROOT/src/frontend/ios/Navi_app.xcodeproj"
 RAILWAY_SERVICE="lovely-vibrancy-production-2c30.up.railway.app"
 
 # Options
@@ -217,7 +217,7 @@ run_backend_tests() {
     fi
     
     # Run API tests if available
-    local api_test_script="$PROJECT_ROOT/scripts/test-api.sh"
+    local api_test_script="$PROJECT_ROOT/src/core/scripts/test-api.sh"
     if [ -f "$api_test_script" ] && [ -x "$api_test_script" ]; then
         log "Running API integration tests..."
         execute "$api_test_script" --quick

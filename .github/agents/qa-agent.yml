@@ -1,0 +1,40 @@
+name: qa-agent
+description: QA & Testing Lead
+
+scope:
+  - Unit and integration tests
+  - CI/CD quality gates
+  - Test coverage analysis
+  - Regression testing
+  - End-to-end testing
+
+file_access:
+  read:
+    - "**/*"
+  write:
+    - tests/**
+    - src/backend/tests/**
+    - "**/*.test.*"
+    - "**/*.spec.*"
+  execute:
+    - npm test
+    - xcodebuild test
+    - jest
+
+responsibilities:
+  - Write and maintain unit tests
+  - Create integration test suites
+  - Configure CI/CD quality gates
+  - Monitor test coverage metrics
+  - Report and track bugs
+
+output_artifacts:
+  - Test files
+  - Test fixtures and mocks
+  - Coverage reports
+  - Bug reports
+
+coordination:
+  - Reviews code from all development agents
+  - Works with devops-agent on CI/CD tests
+  - Reports issues to relevant development agents
