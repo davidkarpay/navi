@@ -1,6 +1,9 @@
 import Foundation
 import WatchConnectivity
 import Combine
+import os.log
+
+private let logger = Logger(subsystem: "com.navi.app", category: "WatchConnectivity")
 
 /// Service that handles communication with the paired Apple Watch
 class WatchConnectivityService: NSObject, ObservableObject {
@@ -19,6 +22,20 @@ class WatchConnectivityService: NSObject, ObservableObject {
 
     private override init() {
         super.init()
+        // Activate WCSession immediately on init
+        activateSession()
+    }
+
+    /// Activate the WatchConnectivity session as early as possible
+    private func activateSession() {
+        if WCSession.isSupported() {
+            session = WCSession.default
+            session?.delegate = self
+            session?.activate()
+            logger.info("Session activation requested")
+        } else {
+            logger.warning("WCSession not supported on this device")
+        }
     }
 
     /// Configure the service with references to the main app managers
@@ -26,13 +43,7 @@ class WatchConnectivityService: NSObject, ObservableObject {
         self.authManager = auth
         self.pairingManager = pairing
         self.tapManager = tap
-
-        // Set up WCSession
-        if WCSession.isSupported() {
-            session = WCSession.default
-            session?.delegate = self
-            session?.activate()
-        }
+        logger.info("Configured with managers")
 
         // Observe auth changes
         auth.$isAuthenticated
@@ -98,6 +109,8 @@ class WatchConnectivityService: NSObject, ObservableObject {
 
 extension WatchConnectivityService: WCSessionDelegate {
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        logger.info("Activation completed: state=\(activationState.rawValue), isPaired=\(session.isPaired), isReachable=\(session.isReachable), error=\(String(describing: error))")
+
         DispatchQueue.main.async {
             self.isWatchPaired = session.isPaired
             self.isWatchReachable = session.isReachable
@@ -109,15 +122,17 @@ extension WatchConnectivityService: WCSessionDelegate {
     }
 
     func sessionDidBecomeInactive(_ session: WCSession) {
-        // Handle session becoming inactive (e.g., when switching watches)
+        logger.info("Session became inactive")
     }
 
     func sessionDidDeactivate(_ session: WCSession) {
-        // Reactivate session after it was deactivated
+        logger.info("Session deactivated, reactivating...")
         session.activate()
     }
 
     func sessionReachabilityDidChange(_ session: WCSession) {
+        logger.info("Reachability changed: isReachable=\(session.isReachable)")
+
         DispatchQueue.main.async {
             self.isWatchReachable = session.isReachable
         }

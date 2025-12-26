@@ -6,6 +6,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         _ application: UIApplication,
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil
     ) -> Bool {
+        // Initialize WatchConnectivity early
+        _ = WatchConnectivityService.shared
+
         // Request notification authorization on launch
         NotificationManager.shared.requestAuthorization()
         return true
