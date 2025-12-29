@@ -10,7 +10,7 @@ import authRoutes from './routes/auth.js';
 import pairingRoutes from './routes/pairing.js';
 import tapRoutes from './routes/tap.js';
 import { authenticateToken } from './middleware/auth.js';
-import { initDatabase } from './db/init.js';
+import { initDatabase, cleanupExpiredCodes, getPool } from './db/init.js';
 import { initWebSocketManager } from './services/websocket.js';
 import { initAPNs } from './services/apns.js';
 
@@ -46,7 +46,12 @@ app.use('/api/tap', tapRoutes);
 
 // Health check
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  const pool = getPool();
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    database: pool ? 'postgresql' : 'in-memory'
+  });
 });
 
 // Error handling
@@ -59,6 +64,13 @@ app.use((err, req, res, next) => {
 initDatabase().then(() => {
   server.listen(PORT, () => {
     console.log(`Navi backend running on port ${PORT}`);
+
+    // Cleanup expired pairing codes every 5 minutes
+    setInterval(() => {
+      cleanupExpiredCodes().catch(err => {
+        console.error('Cleanup error:', err);
+      });
+    }, 5 * 60 * 1000);
   });
 }).catch(err => {
   console.error('Failed to initialize database:', err);
