@@ -1,6 +1,7 @@
 import express from 'express';
 import { authenticateToken } from '../middleware/auth.js';
 import { activePairings } from './pairing.js';
+import { getPairing, getPool } from '../db/init.js';
 import { sendTapToUser } from '../services/websocket.js';
 
 const router = express.Router();
@@ -11,8 +12,19 @@ router.post('/send', authenticateToken, async (req, res) => {
         const { userId } = req.user;
         const { intensity = 'medium', pattern = 'single' } = req.body;
         
-        // Check if user is paired
-        const pairing = activePairings.get(userId);
+        // Check if user is paired (database first, then memory fallback)
+        const pool = getPool();
+        let pairing;
+
+        if (pool) {
+            const dbPairing = await getPairing(userId);
+            if (dbPairing) {
+                pairing = { partnerId: dbPairing.partner_id };
+            }
+        } else {
+            pairing = activePairings.get(userId);
+        }
+
         if (!pairing) {
             return res.status(400).json({ error: 'Not paired with anyone' });
         }
