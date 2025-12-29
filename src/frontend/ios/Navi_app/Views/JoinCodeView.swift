@@ -9,60 +9,65 @@ struct JoinCodeView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 30) {
-                Spacer()
+            ZStack {
+                AppTheme.midnight.ignoresSafeArea()
 
-                VStack(spacing: 20) {
-                    Text("Enter Partner's Code")
-                        .font(.headline)
-                        .foregroundStyle(.secondary)
+                VStack(spacing: 30) {
+                    Spacer()
 
-                    TextField("000000", text: $code)
-                        .font(.system(size: 40, weight: .bold, design: .monospaced))
-                        .multilineTextAlignment(.center)
-                        .keyboardType(.numberPad)
-                        .frame(maxWidth: 200)
-                        .onChange(of: code) { _, newValue in
-                            // Limit to 6 digits
-                            if newValue.count > 6 {
-                                code = String(newValue.prefix(6))
+                    VStack(spacing: 20) {
+                        Text("Enter Partner's Code")
+                            .font(.headline)
+                            .foregroundStyle(AppTheme.secondaryText)
+
+                        TextField("000000", text: $code)
+                            .font(.system(size: 40, weight: .bold, design: .monospaced))
+                            .multilineTextAlignment(.center)
+                            .keyboardType(.numberPad)
+                            .frame(maxWidth: 200)
+                            .foregroundColor(AppTheme.blueGlow)
+                            .onChange(of: code) { _, newValue in
+                                // Limit to 6 digits
+                                if newValue.count > 6 {
+                                    code = String(newValue.prefix(6))
+                                }
+                                // Only allow digits
+                                code = newValue.filter { $0.isNumber }
                             }
-                            // Only allow digits
-                            code = newValue.filter { $0.isNumber }
+
+                        if let error = errorMessage {
+                            Text(error)
+                                .foregroundStyle(AppTheme.redGlow)
+                                .font(.subheadline)
                         }
-
-                    if let error = errorMessage {
-                        Text(error)
-                            .foregroundStyle(.red)
-                            .font(.subheadline)
                     }
-                }
 
-                Spacer()
+                    Spacer()
 
-                Button {
-                    joinWithCode()
-                } label: {
-                    if isJoining {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle(tint: .white))
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color.blue)
-                            .cornerRadius(12)
-                    } else {
-                        Text("Join")
-                            .fontWeight(.semibold)
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(code.count == 6 ? Color.blue : Color.gray)
-                            .foregroundColor(.white)
-                            .cornerRadius(12)
+                    Button {
+                        joinWithCode()
+                    } label: {
+                        if isJoining {
+                            ProgressView()
+                                .progressViewStyle(CircularProgressViewStyle(tint: AppTheme.midnight))
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(AppTheme.blueGlow)
+                                .cornerRadius(12)
+                        } else {
+                            Text("Join")
+                                .fontWeight(.semibold)
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(code.count == 6 ? AppTheme.blueGlow : AppTheme.blueGlowDim)
+                                .foregroundColor(AppTheme.midnight)
+                                .cornerRadius(12)
+                        }
                     }
+                    .disabled(code.count != 6 || isJoining)
+                    .padding(.horizontal, 40)
+                    .padding(.bottom, 60)
                 }
-                .disabled(code.count != 6 || isJoining)
-                .padding(.horizontal, 40)
-                .padding(.bottom, 60)
             }
             .navigationTitle("Join with Code")
             .navigationBarTitleDisplayMode(.inline)
@@ -71,6 +76,7 @@ struct JoinCodeView: View {
                     Button("Cancel") {
                         dismiss()
                     }
+                    .foregroundColor(AppTheme.blueGlow)
                 }
             }
         }

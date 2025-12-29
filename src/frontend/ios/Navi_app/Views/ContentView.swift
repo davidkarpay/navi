@@ -6,14 +6,21 @@ struct ContentView: View {
 
     var body: some View {
         NavigationStack {
-            if !authManager.isAuthenticated {
-                WelcomeView()
-            } else if !pairingManager.isPaired {
-                PairingView()
-            } else {
-                PairedView()
+            ZStack {
+                // Midnight background - absence, silence
+                AppTheme.midnight
+                    .ignoresSafeArea()
+
+                if !authManager.isAuthenticated {
+                    WelcomeView()
+                } else if !pairingManager.isPaired {
+                    PairingView()
+                } else {
+                    PairedView()
+                }
             }
         }
+        .preferredColorScheme(.dark)
     }
 }
 

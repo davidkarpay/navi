@@ -1,12 +1,21 @@
 import Foundation
 import SwiftUI
 import Combine
+import os.log
+
+private let tapLogger = Logger(subsystem: "com.navi.app", category: "TapManager")
 
 class TapManager: ObservableObject {
     @Published var recentTaps: [TapMessage] = []
 
     private var cancellables = Set<AnyCancellable>()
-    private let baseURL = ProcessInfo.processInfo.environment["API_URL"] ?? "https://navi-production-97dd.up.railway.app"
+    private var baseURL: String {
+        #if targetEnvironment(simulator)
+        return ProcessInfo.processInfo.environment["API_URL"] ?? "http://localhost:3000"
+        #else
+        return ProcessInfo.processInfo.environment["API_URL"] ?? "https://navi-production-97dd.up.railway.app"
+        #endif
+    }
     private var authToken: String? {
         UserDefaults.standard.string(forKey: "authToken")
     }
@@ -16,11 +25,19 @@ class TapManager: ObservableObject {
     }
 
     private func setupNotificationObserver() {
+        tapLogger.info("🎧 TapManager: Setting up notification observer")
         NotificationCenter.default.publisher(for: .tapReceived)
-            .compactMap { $0.object as? TapMessage }
             .receive(on: DispatchQueue.main)
-            .sink { [weak self] tapMessage in
-                self?.handleIncomingTap(tapMessage)
+            .sink { [weak self] notification in
+                tapLogger.info("🔔 TapManager: Received tapReceived notification on main thread")
+                if let tapMessage = notification.userInfo?["tapMessage"] as? TapMessage {
+                    tapLogger.info("✅ TapManager: Got TapMessage from userInfo - intensity=\(tapMessage.intensity)")
+                    Task { @MainActor in
+                        self?.handleIncomingTap(tapMessage)
+                    }
+                } else {
+                    tapLogger.error("❌ TapManager: Failed to get TapMessage from notification.userInfo")
+                }
             }
             .store(in: &cancellables)
     }
@@ -71,11 +88,15 @@ class TapManager: ObservableObject {
         }
     }
     
+    @MainActor
     func handleIncomingTap(_ tapMessage: TapMessage) {
-        Task { @MainActor in
-            recentTaps.insert(tapMessage, at: 0)
-            // Trigger haptic feedback
-            await triggerHapticFeedback(intensity: tapMessage.intensity, pattern: tapMessage.pattern)
+        tapLogger.info("💫 TapManager: handleIncomingTap called - intensity=\(tapMessage.intensity), pattern=\(tapMessage.pattern)")
+        tapLogger.info("💫 TapManager: recentTaps count before: \(self.recentTaps.count)")
+        self.recentTaps.insert(tapMessage, at: 0)
+        tapLogger.info("💫 TapManager: recentTaps count after: \(self.recentTaps.count)")
+        // Trigger haptic feedback
+        Task {
+            await self.triggerHapticFeedback(intensity: tapMessage.intensity, pattern: tapMessage.pattern)
         }
     }
     

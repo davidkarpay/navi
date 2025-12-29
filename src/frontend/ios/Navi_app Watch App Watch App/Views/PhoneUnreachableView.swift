@@ -7,23 +7,25 @@ struct PhoneUnreachableView: View {
         VStack(spacing: 16) {
             Image(systemName: "iphone.slash")
                 .font(.system(size: 50))
-                .foregroundStyle(.gray)
+                .foregroundStyle(WatchTheme.blueGlowDim)
 
             Text("iPhone Unavailable")
                 .font(.headline)
+                .foregroundStyle(WatchTheme.primaryText)
 
             Text("Make sure Navi is open on your iPhone")
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(WatchTheme.secondaryText)
                 .multilineTextAlignment(.center)
 
             if connectivityManager.isPaired {
                 Text("Watch is paired")
                     .font(.caption2)
-                    .foregroundStyle(.green)
+                    .foregroundStyle(WatchTheme.blueGlowSubtle)
             }
         }
         .padding()
+        .background(WatchTheme.midnight)
     }
 }
 

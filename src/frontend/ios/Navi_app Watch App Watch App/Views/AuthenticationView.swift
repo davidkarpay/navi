@@ -7,15 +7,16 @@ struct AuthenticationView: View {
         VStack(spacing: 16) {
             Image(systemName: "iphone.circle")
                 .font(.system(size: 50))
-                .foregroundStyle(.blue)
+                .foregroundStyle(WatchTheme.blueGlow)
 
             Text("Open Navi on iPhone")
                 .font(.headline)
+                .foregroundStyle(WatchTheme.primaryText)
                 .multilineTextAlignment(.center)
 
             Text("Complete setup to continue")
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(WatchTheme.secondaryText)
                 .multilineTextAlignment(.center)
 
             Button {
@@ -24,8 +25,10 @@ struct AuthenticationView: View {
                 Label("Refresh", systemImage: "arrow.clockwise")
             }
             .buttonStyle(.bordered)
+            .tint(WatchTheme.blueGlow)
         }
         .padding()
+        .background(WatchTheme.midnight)
     }
 }
 

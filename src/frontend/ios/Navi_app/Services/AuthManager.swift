@@ -7,7 +7,11 @@ class AuthManager: ObservableObject {
     @Published var authToken: String?
     
     var baseURL: String {
+        #if targetEnvironment(simulator)
+        return ProcessInfo.processInfo.environment["API_URL"] ?? "http://localhost:3000"
+        #else
         return ProcessInfo.processInfo.environment["API_URL"] ?? "https://navi-production-97dd.up.railway.app"
+        #endif
     }
     private let userDefaults = UserDefaults.standard
     
@@ -45,9 +49,12 @@ class AuthManager: ObservableObject {
                 self.userId = response.userId
                 self.authToken = response.token
                 self.isAuthenticated = true
-                
+
                 userDefaults.set(response.userId, forKey: "userId")
                 userDefaults.set(response.token, forKey: "authToken")
+
+                // Notify that authentication is complete so WebSocket can connect
+                NotificationCenter.default.post(name: .authenticationCompleted, object: nil)
             }
         } catch {
             print("Registration error: \(error)")

@@ -49,7 +49,7 @@ struct TapView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Intensity")
                             .font(.caption2)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(WatchTheme.secondaryText)
                         Picker("Intensity", selection: $selectedIntensity) {
                             ForEach(intensities, id: \.self) { intensity in
                                 Text(intensity.capitalized).tag(intensity)
@@ -63,7 +63,7 @@ struct TapView: View {
                     VStack(alignment: .leading, spacing: 4) {
                         Text("Pattern")
                             .font(.caption2)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(WatchTheme.secondaryText)
                         Picker("Pattern", selection: $selectedPattern) {
                             ForEach(patterns, id: \.self) { pattern in
                                 Text(pattern.capitalized).tag(pattern)
@@ -101,7 +101,7 @@ struct TapView: View {
             .overlay {
                 if showIncomingTap {
                     Circle()
-                        .fill(Color.purple.opacity(0.4))
+                        .fill(WatchTheme.purpleGlow.opacity(0.4))
                         .scaleEffect(2.5)
                         .allowsHitTesting(false)
                         .animation(.easeOut(duration: 0.3), value: showIncomingTap)
@@ -112,11 +112,11 @@ struct TapView: View {
 
     private var buttonColor: Color {
         if showSuccess {
-            return .green
+            return WatchTheme.success
         } else if showIncomingTap {
-            return .purple
+            return WatchTheme.purpleGlow
         } else {
-            return .blue
+            return WatchTheme.blueGlow
         }
     }
 

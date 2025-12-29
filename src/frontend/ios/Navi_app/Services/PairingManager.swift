@@ -1,21 +1,42 @@
 import Foundation
 import SwiftUI
+import os.log
+import Combine
+
+private let logger = Logger(subsystem: "com.navi.app", category: "PairingManager")
 
 class PairingManager: ObservableObject {
     @Published var isPaired = false
     @Published var partnerId: String?
     @Published var pairedAt: Date?
-    
-    private let baseURL = ProcessInfo.processInfo.environment["API_URL"] ?? "https://navi-production-97dd.up.railway.app"
+
+    private var baseURL: String {
+        #if targetEnvironment(simulator)
+        return ProcessInfo.processInfo.environment["API_URL"] ?? "http://localhost:3000"
+        #else
+        return ProcessInfo.processInfo.environment["API_URL"] ?? "https://navi-production-97dd.up.railway.app"
+        #endif
+    }
     private var authToken: String? {
         UserDefaults.standard.string(forKey: "authToken")
     }
-    
+
     private var webSocketTask: URLSessionWebSocketTask?
-    
+    private var cancellables = Set<AnyCancellable>()
+
     init() {
         checkPairingStatus()
         connectWebSocket()
+
+        // Listen for authentication completion to connect WebSocket
+        NotificationCenter.default.publisher(for: .authenticationCompleted)
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                logger.info("🔔 Received authenticationCompleted notification")
+                self?.webSocketTask = nil  // Reset so connectWebSocket will create new connection
+                self?.connectWebSocket()
+            }
+            .store(in: &cancellables)
     }
     
     func checkPairingStatus() {
@@ -117,27 +138,39 @@ class PairingManager: ObservableObject {
         }
     }
     
-    private func connectWebSocket() {
-        guard let authToken = authToken else { return }
-        
+    /// Connect to WebSocket. Can be called multiple times safely.
+    func connectWebSocket() {
+        guard let authToken = authToken else {
+            logger.info("🔌 connectWebSocket: No auth token, skipping")
+            return
+        }
+
+        // Don't reconnect if already connected
+        if webSocketTask != nil {
+            logger.info("🔌 connectWebSocket: Already connected, skipping")
+            return
+        }
+
+        logger.info("🔌 connectWebSocket: Connecting...")
+
         var urlComponents = URLComponents(string: baseURL)!
         urlComponents.scheme = urlComponents.scheme == "https" ? "wss" : "ws"
-        
+
         let session = URLSession(configuration: .default)
         webSocketTask = session.webSocketTask(with: urlComponents.url!)
         webSocketTask?.resume()
-        
+
         // Send authentication message
         let authMessage = ["type": "auth", "token": authToken]
         if let authData = try? JSONSerialization.data(withJSONObject: authMessage),
            let authString = String(data: authData, encoding: .utf8) {
             webSocketTask?.send(.string(authString)) { error in
                 if let error = error {
-                    print("Auth message send error: \(error)")
+                    logger.error("❌ Auth message send error: \(error)")
                 }
             }
         }
-        
+
         receiveMessage()
     }
     
@@ -145,11 +178,14 @@ class PairingManager: ObservableObject {
         webSocketTask?.receive { [weak self] result in
             switch result {
             case .success(let message):
+                logger.info("🔌 WebSocket received message")
                 switch message {
                 case .string(let text):
+                    logger.info("🔌 WebSocket string message: \(text.prefix(200))")
                     self?.handleWebSocketMessage(text)
                 case .data(let data):
                     if let text = String(data: data, encoding: .utf8) {
+                        logger.info("🔌 WebSocket data message: \(text.prefix(200))")
                         self?.handleWebSocketMessage(text)
                     }
                 @unknown default:
@@ -157,7 +193,7 @@ class PairingManager: ObservableObject {
                 }
                 self?.receiveMessage()
             case .failure(let error):
-                print("WebSocket error: \(error)")
+                logger.error("❌ WebSocket error: \(error)")
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     self?.connectWebSocket()
                 }
@@ -166,14 +202,19 @@ class PairingManager: ObservableObject {
     }
     
     private func handleWebSocketMessage(_ text: String) {
-        guard let data = text.data(using: .utf8) else { return }
-        
+        logger.info("📨 WebSocket received: \(text)")
+        guard let data = text.data(using: .utf8) else {
+            logger.error("❌ Failed to convert text to data")
+            return
+        }
+
         // Try to decode as WebSocketMessage first
         if let message = try? JSONDecoder().decode(WebSocketMessage.self, from: data) {
+            logger.info("📩 Decoded message type: \(message.type)")
             DispatchQueue.main.async {
                 switch message.type {
                 case "auth_success":
-                    print("WebSocket authenticated successfully")
+                    logger.info("✅ WebSocket authenticated successfully")
                 case "paired":
                     self.isPaired = true
                     self.checkPairingStatus()
@@ -183,13 +224,26 @@ class PairingManager: ObservableObject {
                     self.pairedAt = nil
                 case "tap_received":
                     // Handle as tap message - decode as TapMessage
-                    if let tapMessage = try? JSONDecoder().decode(TapMessage.self, from: data) {
-                        NotificationCenter.default.post(name: .tapReceived, object: tapMessage)
+                    logger.info("🔔 Attempting to decode tap message...")
+                    do {
+                        let tapMessage = try JSONDecoder().decode(TapMessage.self, from: data)
+                        logger.info("✅ Tap decoded: intensity=\(tapMessage.intensity), pattern=\(tapMessage.pattern)")
+                        NotificationCenter.default.post(
+                            name: .tapReceived,
+                            object: nil,
+                            userInfo: ["tapMessage": tapMessage]
+                        )
+                        logger.info("📤 Posted tapReceived notification with userInfo")
+                    } catch {
+                        logger.error("❌ Failed to decode TapMessage: \(error)")
                     }
                 default:
+                    logger.warning("⚠️ Unknown message type: \(message.type)")
                     break
                 }
             }
+        } else {
+            logger.error("❌ Failed to decode WebSocketMessage")
         }
     }
 }
@@ -219,4 +273,5 @@ struct WebSocketMessage: Codable {
 // Notification extension
 extension Notification.Name {
     static let tapReceived = Notification.Name("tapReceived")
+    static let authenticationCompleted = Notification.Name("authenticationCompleted")
 }

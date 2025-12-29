@@ -9,17 +9,17 @@ struct PairingView: View {
             Spacer()
 
             VStack(spacing: 16) {
-                Image(systemName: "link.circle.fill")
-                    .font(.system(size: 60))
-                    .foregroundStyle(.blue)
+                // Pairing approach state - two circles approaching with alive glow
+                NaviConnectionIcon(state: .pairingApproach, size: 100)
 
                 Text("Pair with Partner")
                     .font(.title2)
                     .fontWeight(.semibold)
+                    .foregroundColor(AppTheme.primaryText)
 
                 Text("Connect with your partner to start sending taps")
                     .font(.subheadline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(AppTheme.secondaryText)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal)
             }
@@ -27,6 +27,7 @@ struct PairingView: View {
             Spacer()
 
             VStack(spacing: 16) {
+                // Primary action - Blue Glow (You / Initiation)
                 Button {
                     showCreateCode = true
                 } label: {
@@ -34,11 +35,12 @@ struct PairingView: View {
                         .fontWeight(.semibold)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
-                        .foregroundColor(.white)
+                        .background(AppTheme.blueGlow)
+                        .foregroundColor(AppTheme.midnight)
                         .cornerRadius(12)
                 }
 
+                // Secondary action - subtle
                 Button {
                     showJoinCode = true
                 } label: {
@@ -46,8 +48,8 @@ struct PairingView: View {
                         .fontWeight(.semibold)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.gray.opacity(0.2))
-                        .foregroundColor(.primary)
+                        .background(AppTheme.blueGlow.opacity(0.15))
+                        .foregroundColor(AppTheme.blueGlow)
                         .cornerRadius(12)
                 }
             }
@@ -64,6 +66,9 @@ struct PairingView: View {
 }
 
 #Preview {
-    PairingView()
-        .environmentObject(PairingManager())
+    ZStack {
+        AppTheme.midnight.ignoresSafeArea()
+        PairingView()
+            .environmentObject(PairingManager())
+    }
 }

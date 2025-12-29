@@ -4,110 +4,129 @@ struct PairedView: View {
     @EnvironmentObject var pairingManager: PairingManager
     @EnvironmentObject var tapManager: TapManager
     @State private var isSending = false
-    @State private var showSuccess = false
+    @State private var tapState: TapState = .idle
     @State private var showIncomingTap = false
     @State private var incomingIntensity = "medium"
-    @State private var incomingPattern = "single"
     @State private var selectedIntensity = "medium"
     @State private var selectedPattern = "single"
+
+    /// Tap button states following design spec
+    enum TapState {
+        case idle           // Blue Glow, minimal halo
+        case pressed        // Blue intensifies, inner ripple
+        case sent           // Outward ripple, Red response briefly
+        case disconnected   // Blue dims, no red (silence, not error)
+    }
 
     let intensities = ["light", "medium", "strong"]
     let patterns = ["single", "double", "triple", "heartbeat"]
 
     var body: some View {
         ZStack {
+            // Incoming tap overlay - uses overlap motif for confirmation
+            if showIncomingTap {
+                NaviMotifIcon(motif: .overlapBlueRed)
+                    .opacity(opacityForIntensity(incomingIntensity))
+                    .scaleEffect(scaleForIntensity(incomingIntensity))
+                    .allowsHitTesting(false)
+            }
+
             VStack(spacing: 30) {
-                // Status
-                HStack {
-                    Circle()
-                        .fill(.green)
-                        .frame(width: 10, height: 10)
+                // Status indicator using connection state asset
+                HStack(spacing: 8) {
+                    NaviConnectionIcon(state: .connectedOverlap, size: 24)
                     Text("Connected")
                         .font(.subheadline)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(AppTheme.secondaryText)
                 }
                 .padding(.top)
 
                 Spacer()
 
-                // Big Tap Button
+                // Tap Button - uses glow assets for states
                 Button {
                     sendTap()
                 } label: {
                     ZStack {
-                        Circle()
-                            .fill(showSuccess ? .green : .blue)
-                            .frame(width: 180, height: 180)
-                            .shadow(color: (showSuccess ? Color.green : Color.blue).opacity(0.4), radius: 20)
+                        // Ripple effect on sent - use ripple asset
+                        if tapState == .sent {
+                            NaviMotifIcon(motif: rippleMotifForPattern, size: 280)
+                                .opacity(0.6)
+                                .scaleEffect(1.3)
+                                .animation(.easeOut(duration: 0.5), value: tapState)
+                        }
 
+                        // Main tap button - uses tap state assets with alive glow
+                        NaviTapIcon(state: tapState == .pressed ? .pressedBlue : .idleBlue, size: 200)
+                            .scaleEffect(tapState == .pressed ? 0.95 : 1.0)
+                            .animation(.spring(response: 0.3), value: tapState)
+
+                        // Content overlay
                         if isSending {
                             ProgressView()
-                                .progressViewStyle(CircularProgressViewStyle(tint: .white))
+                                .progressViewStyle(CircularProgressViewStyle(tint: AppTheme.primaryText))
                                 .scaleEffect(2)
                         } else {
                             VStack(spacing: 8) {
-                                Image(systemName: showSuccess ? "checkmark" : "hand.tap.fill")
+                                Image(systemName: "hand.tap.fill")
                                     .font(.system(size: 50))
-                                    .foregroundColor(.white)
-                                Text(showSuccess ? "Sent!" : "TAP")
+                                    .foregroundColor(AppTheme.primaryText)
+
+                                Text("TAP")
                                     .font(.title2)
                                     .fontWeight(.bold)
-                                    .foregroundColor(.white)
+                                    .foregroundColor(AppTheme.primaryText)
                             }
                         }
                     }
                 }
                 .disabled(isSending)
-                .scaleEffect(isSending ? 0.95 : 1.0)
-                .animation(.spring(response: 0.3), value: isSending)
 
                 Spacer()
 
-                // Options
+                // Intensity & Pattern - radial feel, not linear
                 VStack(spacing: 16) {
-                    // Intensity Picker
+                    // Intensity = amplitude
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Intensity")
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(AppTheme.secondaryText)
                         Picker("Intensity", selection: $selectedIntensity) {
                             ForEach(intensities, id: \.self) { intensity in
                                 Text(intensity.capitalized).tag(intensity)
                             }
                         }
                         .pickerStyle(.segmented)
+                        .tint(AppTheme.blueGlow)
                     }
 
-                    // Pattern Picker
+                    // Pattern = timing
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Pattern")
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(AppTheme.secondaryText)
                         Picker("Pattern", selection: $selectedPattern) {
                             ForEach(patterns, id: \.self) { pattern in
                                 Text(pattern.capitalized).tag(pattern)
                             }
                         }
                         .pickerStyle(.segmented)
+                        .tint(AppTheme.blueGlow)
                     }
                 }
                 .padding(.horizontal)
 
-                // Unpair button
-                Button("Unpair", role: .destructive) {
+                // Unpair - subtle, not destructive red
+                Button {
                     Task {
                         await pairingManager.unpair()
                     }
+                } label: {
+                    Text("Unpair")
+                        .font(.subheadline)
+                        .foregroundColor(AppTheme.secondaryText)
                 }
                 .padding(.bottom, 30)
-            }
-
-            // Incoming tap overlay - size/opacity based on intensity
-            if showIncomingTap {
-                Circle()
-                    .fill(Color.purple.opacity(opacityForIntensity(incomingIntensity)))
-                    .scaleEffect(scaleForIntensity(incomingIntensity))
-                    .allowsHitTesting(false)
             }
         }
         .navigationTitle("Navi")
@@ -115,42 +134,60 @@ struct PairedView: View {
         .onChange(of: tapManager.recentTaps.count) { oldValue, newValue in
             if newValue > oldValue, let tap = tapManager.recentTaps.first {
                 incomingIntensity = tap.intensity
-                incomingPattern = tap.pattern
-                playTapAnimation(pattern: tap.pattern)
+                playIncomingTapAnimation(pattern: tap.pattern)
             }
         }
     }
 
+    // MARK: - Computed Properties
+
+    /// Ripple motif based on selected pattern
+    private var rippleMotifForPattern: NaviCoreMotif {
+        switch selectedPattern {
+        case "double": return .rippleDouble
+        case "triple": return .rippleTriple
+        default: return .rippleSingle
+        }
+    }
+
+    // MARK: - Actions
+
     private func sendTap() {
         isSending = true
+        tapState = .pressed
+
         Task {
             let success = await tapManager.sendTap(intensity: selectedIntensity, pattern: selectedPattern)
             await MainActor.run {
                 isSending = false
                 if success {
-                    showSuccess = true
+                    tapState = .sent
                     // Haptic feedback
                     let generator = UIImpactFeedbackGenerator(style: .medium)
                     generator.impactOccurred()
-                    // Reset after delay
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                        showSuccess = false
+                    // Reset to idle after animation
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                        withAnimation {
+                            tapState = .idle
+                        }
                     }
+                } else {
+                    tapState = .idle
                 }
             }
         }
     }
 
-    private func playTapAnimation(pattern: String) {
+    // MARK: - Incoming Tap Animation
+
+    private func playIncomingTapAnimation(pattern: String) {
         switch pattern {
         case "double":
-            // Two flashes with gap
             flashOnce(duration: 0.2)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
                 flashOnce(duration: 0.2)
             }
         case "triple":
-            // Three flashes with gaps
             flashOnce(duration: 0.15)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                 flashOnce(duration: 0.15)
@@ -159,7 +196,6 @@ struct PairedView: View {
                 flashOnce(duration: 0.15)
             }
         case "heartbeat":
-            // Lub-dub rhythm: quick-quick, pause, quick-quick
             flashOnce(duration: 0.1)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
                 flashOnce(duration: 0.1)
@@ -205,8 +241,11 @@ struct PairedView: View {
 
 #Preview {
     NavigationStack {
-        PairedView()
-            .environmentObject(PairingManager())
-            .environmentObject(TapManager())
+        ZStack {
+            AppTheme.midnight.ignoresSafeArea()
+            PairedView()
+                .environmentObject(PairingManager())
+                .environmentObject(TapManager())
+        }
     }
 }

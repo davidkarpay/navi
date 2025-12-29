@@ -12,22 +12,22 @@ struct SettingsView: View {
                         Text("iPhone")
                         Spacer()
                         Circle()
-                            .fill(connectivityManager.isReachable ? .green : .red)
+                            .fill(connectivityManager.isReachable ? WatchTheme.success : WatchTheme.blueGlowDim)
                             .frame(width: 10, height: 10)
                         Text(connectivityManager.isReachable ? "Connected" : "Disconnected")
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(WatchTheme.secondaryText)
                     }
 
                     HStack {
                         Text("Watch Paired")
                         Spacer()
                         Circle()
-                            .fill(connectivityManager.isPaired ? .green : .red)
+                            .fill(connectivityManager.isPaired ? WatchTheme.blueGlow : WatchTheme.blueGlowDim)
                             .frame(width: 10, height: 10)
                         Text(connectivityManager.isPaired ? "Yes" : "No")
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(WatchTheme.secondaryText)
                     }
                 }
 
@@ -37,7 +37,7 @@ struct SettingsView: View {
                         Spacer()
                         Text(connectivityManager.isPairedWithPartner ? "Paired" : "Not Paired")
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(WatchTheme.secondaryText)
                     }
                 }
 
@@ -55,7 +55,7 @@ struct SettingsView: View {
                         Spacer()
                         Text("1.0.0")
                             .font(.caption)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(WatchTheme.secondaryText)
                     }
                 }
             }

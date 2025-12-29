@@ -7,14 +7,15 @@ struct PairingStatusView: View {
         VStack(spacing: 16) {
             Image(systemName: "link.circle")
                 .font(.system(size: 50))
-                .foregroundStyle(.orange)
+                .foregroundStyle(WatchTheme.blueGlow)
 
             Text("Not Paired")
                 .font(.headline)
+                .foregroundStyle(WatchTheme.primaryText)
 
             Text("Pair with your partner on iPhone to start sending taps")
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(WatchTheme.secondaryText)
                 .multilineTextAlignment(.center)
 
             Button {
@@ -23,8 +24,10 @@ struct PairingStatusView: View {
                 Label("Refresh", systemImage: "arrow.clockwise")
             }
             .buttonStyle(.bordered)
+            .tint(WatchTheme.blueGlow)
         }
         .padding()
+        .background(WatchTheme.midnight)
     }
 }
 
